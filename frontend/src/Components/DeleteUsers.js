@@ -17,7 +17,7 @@ const SendData = (props) => {
     return (
         <>
             <br/><br/>
-            <h4>Enter student's rollno to be deleted.</h4>
+            <h4>Enter userid to be deleted.</h4>
             <form method="GET" onSubmit={deleteStd}>
                 <input type="text" name="userid" onChange={handleChange} placeholder="UserId"/>
                 <input type="Submit" value="Delete"/>
