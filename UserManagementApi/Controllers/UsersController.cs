@@ -19,7 +19,7 @@ public class UsersController : ControllerBase
     [EnableCors()]
     public IEnumerable<User> GetAllUsers()
     {
-        List<User> users = UsersDataAccess.GetAllNotes();
+        List<User> users = UsersDataAccess.GetAllUsers();
         return users;
     }
 
@@ -28,8 +28,15 @@ public class UsersController : ControllerBase
     [EnableCors()]
     public ActionResult<User> GetOneUser(int id)
     {
-        User users = UsersDataAccess.GetNoteByNoteId(id);
+        User users = UsersDataAccess.GetUserById(id);
         return users;
+    }
+
+    [HttpPost]
+    public IActionResult Create(User user)
+    {
+        UsersDataAccess.SaveNewUser();
+        return Ok(new { message = "User created" });
     }
 
     [Route("{id}")]
@@ -37,7 +44,7 @@ public class UsersController : ControllerBase
     [EnableCors()]
     public ActionResult<User> DeleteOneUser(int id)
     {
-        User users = UsersDataAccess.GetNoteByNoteId(id);
-        return users;
+        UsersDataAccess.DeleteUserById(id);
+        return Ok(new { message = "User deleted" });
     }
 }

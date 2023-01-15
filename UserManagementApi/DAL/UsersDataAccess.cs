@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 public class UsersDataAccess
 {
     public static string conString = @"server=localhost; port=3306; user=root; password=root; database=userinfo";
-    public static List<User> GetAllNotes()
+    public static List<User> GetAllUsers()
     {
         List<User> allNotes = new List<User>();
         MySqlConnection con = new MySqlConnection(conString);
@@ -41,7 +41,7 @@ public class UsersDataAccess
         return allNotes;
     }
 
-    public static User GetNoteByNoteId(int id)
+    public static User GetUserById(int id)
     {
         User user = null;
         MySqlConnection con = new MySqlConnection(conString);
@@ -75,4 +75,29 @@ public class UsersDataAccess
         }
         return user;
     }
+
+    public static void SaveNewUser(){}
+
+    public static void DeleteUserById(int id)
+    {
+        MySqlConnection con = new MySqlConnection(conString);
+
+        try
+        {
+            con.Open();
+            string query = "delete from users where userid =" + id;
+            MySqlCommand command = new MySqlCommand(query, con);
+            MySqlDataReader reader = command.ExecuteReader();
+            con.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        finally
+        {
+            con.Close();
+        }
+    }
+
 }
