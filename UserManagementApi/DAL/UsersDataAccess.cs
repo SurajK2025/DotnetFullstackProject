@@ -76,7 +76,27 @@ public class UsersDataAccess
         return user;
     }
 
-    public static void SaveNewUser(){}
+    public static void SaveNewUser(User user)
+    {
+        MySqlConnection con = new MySqlConnection(conString);
+
+        try
+        {
+            con.Open();
+            string query = $"insert into users(username, course, purchasedate) values('{user.username}', '{user.course}', '{user.purchasedate}';)";
+            MySqlCommand command = new MySqlCommand(query, con);
+            MySqlDataReader reader = command.ExecuteReader();
+            con.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        finally
+        {
+            con.Close();
+        }
+    }
 
     public static void DeleteUserById(int id)
     {

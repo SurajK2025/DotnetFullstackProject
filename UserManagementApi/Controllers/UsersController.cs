@@ -33,9 +33,10 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create(User user)
+    [EnableCors()]
+    public IActionResult InsertNewUser([FromBody] User user)
     {
-        UsersDataAccess.SaveNewUser();
+        UsersDataAccess.SaveNewUser(user);
         return Ok(new { message = "User created" });
     }
 
