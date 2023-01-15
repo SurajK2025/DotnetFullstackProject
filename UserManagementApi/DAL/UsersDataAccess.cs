@@ -83,9 +83,9 @@ public class UsersDataAccess
         try
         {
             con.Open();
-            string query = $"insert into users(username, course, purchasedate) values('{user.username}', '{user.course}', '{user.purchasedate}';)";
+            string query = $"insert into users(username, course, purchasedate) values('{user.username}', '{user.course}', '{user.purchasedate}')";
             MySqlCommand command = new MySqlCommand(query, con);
-            MySqlDataReader reader = command.ExecuteReader();
+            command.ExecuteNonQuery();
             con.Close();
         }
         catch (Exception e)
@@ -107,7 +107,7 @@ public class UsersDataAccess
             con.Open();
             string query = "delete from users where userid =" + id;
             MySqlCommand command = new MySqlCommand(query, con);
-            MySqlDataReader reader = command.ExecuteReader();
+            command.ExecuteNonQuery();
             con.Close();
         }
         catch (Exception e)
