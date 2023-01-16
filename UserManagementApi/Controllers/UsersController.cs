@@ -48,4 +48,13 @@ public class UsersController : ControllerBase
         UsersDataAccess.DeleteUserById(id);
         return Ok(new { message = "User deleted" });
     }
+
+    [Route("{id}")]
+    [HttpPut]
+    [EnableCors()]
+    public IActionResult UpdateUser(int id, [FromBody] User user)
+    {
+        UsersDataAccess.UpdateUser(id, user);
+        return Ok(new { message = "User updated" });
+    }
 }

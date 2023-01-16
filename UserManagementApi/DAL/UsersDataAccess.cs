@@ -120,4 +120,25 @@ public class UsersDataAccess
         }
     }
 
+    public static void UpdateUser(int id, User user)
+    {
+        MySqlConnection con = new MySqlConnection(conString);
+
+        try
+        {
+            con.Open();
+            string query = $"update users set username='{user.username}', course='{user.course}', purchasedate='{user.purchasedate}' where userid={id}";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.ExecuteNonQuery();
+            con.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        finally
+        {
+            con.Close();
+        }
+    }
 }
