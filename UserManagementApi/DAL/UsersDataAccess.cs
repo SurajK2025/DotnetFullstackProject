@@ -41,41 +41,6 @@ public class UsersDataAccess
         return allNotes;
     }
 
-    public static User GetUserById(int id)
-    {
-        User user = null;
-        MySqlConnection con = new MySqlConnection(conString);
-
-        try
-        {
-            con.Open();
-            string query = "select * from users where userid=" + id;
-            MySqlCommand command = new MySqlCommand(query, con);
-            MySqlDataReader reader = command.ExecuteReader();
-
-            if (reader.Read())
-            {
-                user = new User
-                {
-                    userid = int.Parse(reader["userid"].ToString()),
-                    username = reader["username"].ToString(),
-                    course = reader["course"].ToString(),
-                    purchasedate = reader["purchasedate"].ToString()
-                };
-            }
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
-        finally
-        {
-            con.Close();
-        }
-        return user;
-    }
-
     public static void SaveNewUser(User user)
     {
         MySqlConnection con = new MySqlConnection(conString);
@@ -86,7 +51,6 @@ public class UsersDataAccess
             string query = $"insert into users(username, course, purchasedate) values('{user.username}', '{user.course}', '{user.purchasedate}')";
             MySqlCommand command = new MySqlCommand(query, con);
             command.ExecuteNonQuery();
-            con.Close();
         }
         catch (Exception e)
         {
@@ -108,7 +72,6 @@ public class UsersDataAccess
             string query = "delete from users where userid =" + id;
             MySqlCommand command = new MySqlCommand(query, con);
             command.ExecuteNonQuery();
-            con.Close();
         }
         catch (Exception e)
         {
@@ -130,7 +93,6 @@ public class UsersDataAccess
             string query = $"update users set username='{user.username}', course='{user.course}', purchasedate='{user.purchasedate}' where userid={id}";
             MySqlCommand command = new MySqlCommand(query, con);
             command.ExecuteNonQuery();
-            con.Close();
         }
         catch (Exception e)
         {

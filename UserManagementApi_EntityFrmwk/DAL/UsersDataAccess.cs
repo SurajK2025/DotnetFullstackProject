@@ -1,7 +1,7 @@
-using UserManagementApiWithEntityFrmwk.Model;
-using UserManagementApiWithEntityFrmwk.DBContext;
+using UserManagementApi_EntityFrmwk.Model;
+using UserManagementApi_EntityFrmwk.DBContext;
 
-namespace UserManagementApiWithEntityFrmwk.DAL;
+namespace UserManagementApi_EntityFrmwk.DAL;
 
 public class UsersDataAccess {
     public static void DeleteOneUser(int id)
@@ -28,6 +28,18 @@ public class UsersDataAccess {
         {
             context.Users.Add(user);
             context.SaveChanges();  
+        }
+    }
+
+    public static void UpdateUser(User user)
+    {
+        using (var context = new UserDbContext())
+        {
+            var theUser = context.Users.Find(user.userid);
+            theUser.username =user.username;
+            theUser.course=user.course;
+            theUser.purchasedate=user.purchasedate;
+            context.SaveChanges();
         }
     }
 }

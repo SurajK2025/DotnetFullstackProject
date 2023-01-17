@@ -7,7 +7,7 @@ const UpdateData = (props) => {
 
     const savedata = (event) => {
         event.preventDefault();
-        axios.put(`http://localhost:5213/api/users/${id.}`, apiData);
+        axios.put(`http://localhost:5213/api/users/${id.userid}`, apiData);
     }
 
     const handleChange = (event) => {

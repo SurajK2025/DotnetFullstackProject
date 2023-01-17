@@ -23,15 +23,6 @@ public class UsersController : ControllerBase
         return users;
     }
 
-    [Route("{id}")]
-    [HttpGet]
-    [EnableCors()]
-    public ActionResult<User> GetOneUser(int id)
-    {
-        User users = UsersDataAccess.GetUserById(id);
-        return users;
-    }
-
     [HttpPost]
     [EnableCors()]
     public IActionResult InsertNewUser(User user)
@@ -43,7 +34,7 @@ public class UsersController : ControllerBase
     [Route("{id}")]
     [HttpDelete]
     [EnableCors()]
-    public ActionResult<User> DeleteOneUser(int id)
+    public IActionResult DeleteOneUser(int id)
     {
         UsersDataAccess.DeleteUserById(id);
         return Ok(new { message = "User deleted" });

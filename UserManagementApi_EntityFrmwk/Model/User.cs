@@ -1,4 +1,4 @@
-namespace UserManagementApiWithEntityFrmwk.Model;
+namespace UserManagementApi_EntityFrmwk.Model;
 using System.ComponentModel.DataAnnotations;
 public class User
 {

@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using UserManagementApiWithEntityFrmwk.Model;
-namespace UserManagementApiWithEntityFrmwk.DBContext;
+using UserManagementApi_EntityFrmwk.Model;
+namespace UserManagementApi_EntityFrmwk.DBContext;
 public class UserDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        string conString = @"server=localhost; port=3306; user=root; password=root; database=usersinfo";
+        string conString = @"server=localhost; port=3306; user=root; password=root; database=userinfo";
         optionsBuilder.UseMySQL(conString);
     }
 

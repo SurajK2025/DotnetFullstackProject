@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
-using UserManagementApiWithEntityFrmwk.Model;
-using UserManagementApiWithEntityFrmwk.DAL;
+using UserManagementApi_EntityFrmwk.Model;
+using UserManagementApi_EntityFrmwk.DAL;
 
-namespace UserManagementApiWithEntityFrmwk.Controllers;
+namespace UserManagementApi_EntityFrmwk.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -35,9 +35,16 @@ public class UsersController : ControllerBase
     [Route("{id}")]
     [HttpDelete]
     [EnableCors()]
-    public ActionResult<User> DeleteOneUser(int id)
+    public IActionResult DeleteOneUser(int id)
     {
         UsersDataAccess.DeleteOneUser(id);
         return Ok(new { message = "User deleted" });
+    }
+
+    [HttpPut]
+    public IActionResult UpdateUser(User user)
+    {
+        UsersDataAccess.UpdateUser(user);
+        return Ok(new { message = "User updated" });
     }
 }
